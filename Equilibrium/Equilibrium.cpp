@@ -2,9 +2,12 @@
 #include "stdafx.h"
 #include "../Equilibrium.Test/TestExchange.h"
 #include <thread>
+#include "../Equilibrium.Test/TestWallet.h"
+
 int main()
 {
 	printf("Hello C++ I'm back\n");
+	auto wallet = new TestWallet(10);
 	auto MegaMarket = new TestExchange(1000000, 1200000,100);
 	std::thread first(&TestExchange::EmulateActivity,MegaMarket);
 	printf("Created Mega Market Test Exchange\n");

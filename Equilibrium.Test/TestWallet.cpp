@@ -3,20 +3,20 @@
 
 TestWallet :: TestWallet(double StartingValue)
 {
-	this->Wealth = StartingValue;
+	this->_wealth = StartingValue;
 }
 
 void TestWallet :: Pay(double value)
 {
-	this->Wealth += value;
+	this->_wealth += value;
 }
 
 void TestWallet :: Charge(double value)
 {
-	this->Wealth -= value;
+	this->_wealth -= value;
 }
 
 double TestWallet :: CurrentWealth() const
 {
-	return this->Wealth;
+	return this->_wealth;
 }

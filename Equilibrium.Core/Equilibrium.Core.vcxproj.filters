@@ -24,13 +24,13 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Equilibruim.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Exchange.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Wallet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Equilibrium.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,7 +44,7 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Equilibruim.cpp">
+    <ClCompile Include="Equilibrium.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,6 +6,14 @@
 #include <random>
 #include <iostream>
 
+TestExchange::TestExchange()
+{
+	this->_sleepTime = 1000;
+	this->_demand = 1;
+	this->_supply = 1;
+}
+
+
 TestExchange::TestExchange(double supply, double demand, int sleepTime)
 {
 	this->_supply = supply;
@@ -17,14 +25,14 @@ TestExchange::~TestExchange()
 {
 }
 
-double TestExchange::GetBuyValue() const
-{
-	return this->_demand / this->_supply;
-}
-
-double TestExchange::GetSellValue() const
+double TestExchange::BuyingAt() const
 {
 	return this->_demand / this->_supply - 0.02;
+}
+
+double TestExchange::SellingAt() const
+{
+	return this->_demand / this->_supply;
 }
 
 double TestExchange::GetRawValue() const
@@ -32,14 +40,15 @@ double TestExchange::GetRawValue() const
 	return this->_demand / this->_supply;
 }
 
-void TestExchange::Buy(double volume, TestWallet * userWallet)
+void TestExchange::Buy(double volume, IWallet * userWallet)
 {
 	if(volume > this->_supply)
 	{
 		throw std::exception("Can't Buy more than the supplier has");
 	}
-	this->_supply -= volume;
-	userWallet->Charge(volume * this->GetBuyValue());
+	double sellingAt = this->SellingAt();
+	this->_supply -= volume;	
+	userWallet->Charge(volume * sellingAt);
 }
 
 void TestExchange::EmulateActivity()
@@ -49,12 +58,12 @@ void TestExchange::EmulateActivity()
 	this->_demand -= (this->_demand / 100) * difference;
 	auto newValue = (this->_demand / this->_supply);
 	Sleep(this->_sleepTime);
-	printf("market shift from %f to %f \n", currentValue, newValue);
-	this->EmulateActivity();
+	//printf("market shift from %f to %f \n", currentValue, newValue);	
 }
 
-void TestExchange::Sell(double volume, TestWallet * userWallet)
+void TestExchange::Sell(double volume, IWallet * userWallet)
 {
+	double buyingAt = this->BuyingAt();
 	this->_supply += volume;
-	userWallet->Pay(volume * this->GetSellValue());
+	userWallet->Pay(volume *buyingAt);
 }

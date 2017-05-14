@@ -3,9 +3,9 @@
 class IExchange
 {
 public:
-	virtual double GetBuyValue() const;
-	virtual double GetSellValue() const;
-	virtual double GetRawValue() const;
-	virtual void Buy(double volume, IWallet * userWallet);
-	virtual void Sell(double volume, IWallet * userWallet);
+	virtual double BuyingAt() const =0;
+	virtual double SellingAt()const =0;
+	virtual double GetRawValue()const =0;
+	virtual void Buy(double volume, IWallet * userWallet)= 0;
+	virtual void Sell(double volume, IWallet * userWallet) = 0;
 };

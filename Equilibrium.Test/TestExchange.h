@@ -1,19 +1,20 @@
 #pragma once
 #include "stdafx.h"
-#include <bemapiset.h>
 #include "TestWallet.h"
-class TestExchange
+#include "../Equilibrium.Core/Exchange.h"
+
+class TestExchange :public IExchange
 {
 public:
-	TestExchange(int sleepTime);
+	TestExchange();
 	TestExchange(double supply, double demand, int sleepTime);
 	~TestExchange();
-	double GetBuyValue() const;
-	double GetSellValue() const;	
-	double GetRawValue() const;
-	void Buy(double volume, TestWallet * userWallet);
+	double BuyingAt() const override;
+	double SellingAt() const override;
+	double GetRawValue() const override;
+	void  Buy(double volume, IWallet * userWallet) override;
 	void EmulateActivity();
-	void Sell(double volume, TestWallet * userWallet);
+	void Sell(double volume, IWallet * userWallet) override;
 private:
 	double _supply;
 	double _demand;

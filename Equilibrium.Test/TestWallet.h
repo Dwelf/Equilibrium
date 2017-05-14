@@ -1,5 +1,7 @@
 #pragma once
-class TestWallet
+#include "../Equilibrium.Core/Wallet.h"
+
+class TestWallet :public IWallet
 {
 public :
 	TestWallet::TestWallet(double StartingValue);
@@ -7,5 +9,5 @@ public :
 	void Charge(double value);
 	double CurrentWealth() const;
 private:
-	double Wealth = 0;
+	double _wealth = 0;
 };

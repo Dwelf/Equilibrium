@@ -3,25 +3,26 @@
 #include "../Equilibrium.Test/TestExchange.h"
 #include <thread>
 #include "../Equilibrium.Test/TestWallet.h"
-
+#include "../Equilibrium.Test/TestBench.h"
+#include "../Equilibrium.Core/Equilibrium.h"
 int main()
 {
 	printf("Hello C++ I'm back\n");
-	auto wallet = new TestWallet(1000000);
-	auto MegaMarket = new TestExchange(1000000, 1200000,100);
-	std::thread first(&TestExchange::EmulateActivity,MegaMarket);
-	printf("Created Mega Market Test Exchange\n");
-	printf("Current Value is %f\n", MegaMarket->GetBuyValue());
-	printf("Buying 40000 from MegaMarket\n");
-	MegaMarket->Buy(40000,wallet);
-	printf("Current Wealth is %f\n", wallet->CurrentWealth());
-	printf("Current Value is %f\n", MegaMarket->GetBuyValue());
-	printf("Selling 80000 to MegaMarket\n");
-	MegaMarket->Sell(80000,wallet);
-	printf("Current Wealth is %f\n", wallet->CurrentWealth());
-	printf("Current Value is %f\n", MegaMarket->GetBuyValue());
-	printf("Current Sale Value is %f\n", MegaMarket->GetSellValue());
+	auto exchanges = 4;
+	IWallet  * wallet = new TestWallet(100000);
+	printf("Setup Wallet with %f\n", wallet->CurrentWealth());
+	auto testBench = new TestBench(exchanges, 1000000, 1200000, 100);
+	printf("Setup %d exchanges\n", exchanges);
+	auto testAlog = new Equilibrium(testBench->GetExchanges(), exchanges);
+	testBench->Emulate();
+	printf("Started emulation\n");
+	testAlog->StartBalancing(wallet);
+	printf("Start Balancing\n");
 	Sleep(20000);
-	first.join();
+	printf("Current Wealth is %f\n", wallet->CurrentWealth());
+	Sleep(2000);
+	testBench->StopEmulation();
+	testAlog->StopBalancing();
+	Sleep(200);
 	getchar();
 }

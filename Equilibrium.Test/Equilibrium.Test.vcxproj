@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestBench.h" />
     <ClInclude Include="TestExchange.h" />
     <ClInclude Include="TestWallet.h" />
   </ItemGroup>
@@ -158,8 +159,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestBench.cpp" />
     <ClCompile Include="TestExchange.cpp" />
     <ClCompile Include="TestWallet.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Equilibrium.Core\Equilibrium.Core.vcxproj">
+      <Project>{15f0c98a-fa60-42e1-be4f-8b62f22f9f54}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

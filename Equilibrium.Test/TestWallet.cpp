@@ -15,3 +15,8 @@ void TestWallet :: Charge(double value)
 {
 	this->Wealth -= value;
 }
+
+double TestWallet :: CurrentWealth() const
+{
+	return this->Wealth;
+}

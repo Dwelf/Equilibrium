@@ -2,6 +2,9 @@
 #include "TestExchange.h"
 #include <exception>
 #include <synchapi.h>
+#include "TestWallet.h"
+#include <random>
+#include <iostream>
 
 TestExchange::TestExchange(double supply, double demand, int sleepTime)
 {
@@ -29,13 +32,14 @@ double TestExchange::GetRawValue() const
 	return this->_demand / this->_supply;
 }
 
-void TestExchange::Buy(double volume)
+void TestExchange::Buy(double volume, TestWallet * userWallet)
 {
 	if(volume > this->_supply)
 	{
 		throw std::exception("Can't Buy more than the supplier has");
 	}
 	this->_supply -= volume;
+	userWallet->Charge(volume * this->GetBuyValue());
 }
 
 void TestExchange::EmulateActivity()
@@ -49,7 +53,8 @@ void TestExchange::EmulateActivity()
 	this->EmulateActivity();
 }
 
-void TestExchange::Sell(double volume)
+void TestExchange::Sell(double volume, TestWallet * userWallet)
 {
 	this->_supply += volume;
+	userWallet->Pay(volume * this->GetSellValue());
 }

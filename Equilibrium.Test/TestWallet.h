@@ -5,6 +5,7 @@ public :
 	TestWallet::TestWallet(double StartingValue);
 	void Pay(double value);
 	void Charge(double value);
+	double CurrentWealth() const;
 private:
-	int Wealth = 0;
+	double Wealth = 0;
 };

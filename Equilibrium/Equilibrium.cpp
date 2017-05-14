@@ -1,4 +1,3 @@
-// Equilibrium.cpp : Defines the entry point for the console application.
 #include "stdafx.h"
 #include "../Equilibrium.Test/TestExchange.h"
 #include <thread>

@@ -15,13 +15,10 @@ public:
 protected:
 	void updateCollections();
 	void setupCollections(std::vector<IExchange *> *, int size);
-	void balance(IWallet * wallet);
-	int partitionBuying(const int left, const int right);
-	void quicksortBuying(const int left, const int right);
-	int partitionSelling(const int left, const int right);
-	void quicksortSelling(const int left, const int right);
-	std::vector<IExchange*>  _buyingPrice;
-	std::vector<IExchange*>  _sellingPrice;
+	void balance(IWallet * wallet);	
+	std::vector<IExchange*> * _exchanges;
+	IExchange * BestBuy;
+	IExchange * BestSell;
 private:
 	bool isBalancing();
 	const int _size;
